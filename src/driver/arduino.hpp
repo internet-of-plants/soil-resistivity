@@ -11,26 +11,26 @@
 #include <iop-hal/panic.hpp>
 
 namespace sensor {
-#define SENSOR(self) static_cast<driver::io::Pin*>((self).sensor)
+#define SENSOR(self) static_cast<iop_hal::io::Pin*>((self).sensor)
 
-SoilResistivity::SoilResistivity(const driver::io::Pin powerPin) noexcept: sensor(new (std::nothrow) driver::io::Pin(powerPin)) {
+SoilResistivity::SoilResistivity(const iop_hal::io::Pin powerPin) noexcept: sensor(new (std::nothrow) iop_hal::io::Pin(powerPin)) {
     iop_assert(this->sensor != nullptr, IOP_STR("Unable to allocate SoilResistivity"));
 }
 
 auto SoilResistivity::begin() noexcept -> void {
     iop_assert(this->sensor != nullptr, IOP_STR("Sensor is nullptr"));
-    driver::gpio.setMode(*SENSOR(*this), driver::io::Mode::OUTPUT);
+    iop_hal::gpio.setMode(*SENSOR(*this), iop_hal::io::Mode::OUTPUT);
 }
 auto SoilResistivity::measure() noexcept -> uint16_t {
     iop_assert(this->sensor != nullptr, IOP_STR("Sensor is nullptr"));
-    digitalWrite(static_cast<uint8_t>(*SENSOR(*this)), static_cast<uint8_t>(driver::io::Data::HIGH));
+    digitalWrite(static_cast<uint8_t>(*SENSOR(*this)), static_cast<uint8_t>(iop_hal::io::Data::HIGH));
     delay(2000); // NOLINT *-avoid-magic-numbers
     uint16_t value1 = analogRead(A0);
     delay(500); // NOLINT *-avoid-magic-numbers
     uint16_t value2 = analogRead(A0);
     delay(500); // NOLINT *-avoid-magic-numbers
     uint16_t value = (value1 + value2 + analogRead(A0)) / 3;
-    digitalWrite(static_cast<uint8_t>(*SENSOR(*this)), static_cast<uint8_t>(driver::io::Data::LOW));
+    digitalWrite(static_cast<uint8_t>(*SENSOR(*this)), static_cast<uint8_t>(iop_hal::io::Data::LOW));
     return value;
 }
 
