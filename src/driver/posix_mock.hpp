@@ -14,12 +14,12 @@ auto randomValue() -> uint16_t {
 }
 
 auto randomVariation(uint16_t current) -> uint16_t {
-    if (current < 200) return current = std::max(std::static_cast<uint16_t>(current + randomValue()), 1024);
+    if (current < 200) return current = std::max(static_cast<uint16_t>(current + randomValue()), 1024);
 
     std::random_device dev;
     std::mt19937 rng(dev());
     std::uniform_int_distribution<std::mt19937::result_type> dist(-6,0);
-    return std::max(std::static_cast<uint16_t>(current + dist(rng)), 1024);
+    return std::max(static_cast<uint16_t>(current + dist(rng)), 1024);
 }
 
 namespace sensor {
