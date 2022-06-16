@@ -5,6 +5,7 @@
 
 #include <random>
 
+namespace sensor {
 auto randomValue() -> uint16_t {
     std::random_device dev;
     std::mt19937 rng(dev());
@@ -21,7 +22,6 @@ auto randomVariation(uint16_t current) -> uint16_t {
     return std::min(current + static_cast<uint16_t>(dist(rng)), 1024);
 }
 
-namespace sensor {
 SoilResistivity::SoilResistivity(const iop_hal::PinRaw powerPin) noexcept: sensor(new uint16_t(randomValue())) { (void) powerPin; }
 
 auto SoilResistivity::begin() noexcept -> void {}
