@@ -4,7 +4,6 @@
 #include <soil_resistivity.hpp>
 
 #include <random>
-#include <iostream>
 
 auto randomValue() -> uint16_t {
     std::random_device dev;
@@ -23,7 +22,7 @@ auto randomVariation(uint16_t current) -> uint16_t {
 }
 
 namespace sensor {
-SoilResistivity::SoilResistivity(const iop_hal::PinRaw powerPin): sensor(new uint16_t(randomValue())) noexcept { (void) powerPin; }
+SoilResistivity::SoilResistivity(const iop_hal::PinRaw powerPin) noexcept: sensor(new uint16_t(randomValue())) { (void) powerPin; }
 
 auto SoilResistivity::begin() noexcept -> void {}
 auto SoilResistivity::measure() noexcept -> uint16_t {
@@ -36,6 +35,7 @@ auto SoilResistivity::operator=(SoilResistivity && other) noexcept -> SoilResist
     delete reinterpret_cast<uint16_t*>(this->sensor);
     this->sensor = other.sensor;
     other.sensor = nullptr;
+    return *this;
 }
 SoilResistivity::~SoilResistivity() noexcept {
     delete reinterpret_cast<uint16_t*>(this->sensor);
