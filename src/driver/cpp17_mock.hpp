@@ -1,5 +1,5 @@
-#ifndef IOP_LIB_SENSORS_SOIL_RESISTIVITY_POSIX_MOCK_HPP
-#define IOP_LIB_SENSORS_SOIL_RESISTIVITY_POSIX_MOCK_HPP
+#ifndef IOP_LIB_SENSORS_SOIL_RESISTIVITY_CPP17_MOCK_HPP
+#define IOP_LIB_SENSORS_SOIL_RESISTIVITY_CPP17_MOCK_HPP
 
 #include <soil_resistivity.hpp>
 
@@ -14,16 +14,16 @@ auto randomValue() -> uint16_t {
 }
 
 auto randomVariation(uint16_t current) -> uint16_t {
-    if (current < 200) return current = std::max(static_cast<uint16_t>(current + randomValue()), 1024);
+    if (current < 200) return current = std::min(current + randomValue(), 1024);
 
     std::random_device dev;
     std::mt19937 rng(dev());
     std::uniform_int_distribution<std::mt19937::result_type> dist(-6,0);
-    return std::max(static_cast<uint16_t>(current + dist(rng)), 1024);
+    return std::min(current + static_cast<uint16_t>(dist(rng)), 1024);
 }
 
 namespace sensor {
-SoilResistivity::SoilResistivity(const iop_hal::PinRaw powerPin) noexcept { (void) powerPin; this->sensor = new uint16_t(randomValue()); }
+SoilResistivity::SoilResistivity(const iop_hal::PinRaw powerPin): sensor(new uint16_t(randomValue())) noexcept { (void) powerPin; }
 
 auto SoilResistivity::begin() noexcept -> void {}
 auto SoilResistivity::measure() noexcept -> uint16_t {
