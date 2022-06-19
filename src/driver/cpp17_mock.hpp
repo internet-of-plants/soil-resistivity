@@ -14,12 +14,13 @@ auto randomValue() -> uint16_t {
 }
 
 auto randomVariation(uint16_t current) -> uint16_t {
-    if (current < 200) return current = std::min(current + randomValue(), 1024);
+    if (current <= 200) return std::min(current + randomValue(), 1024);
 
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> dist(-6,0);
-    return std::min(current + static_cast<uint16_t>(dist(rng)), 1024);
+    std::uniform_int_distribution<std::mt19937::result_type> dist(0, 16);
+    if (current == 1024) return current - dist(rng);
+    return std::min(current + dist(rng) - 15, 1024);
 }
 
 SoilResistivity::SoilResistivity(const iop_hal::PinRaw powerPin) noexcept: sensor(new uint16_t(randomValue())) { (void) powerPin; }
