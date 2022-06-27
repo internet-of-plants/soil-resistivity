@@ -1,4 +1,4 @@
-# Internet of Plants - Soil REsistivity Sensor
+# Internet of Plants - Soil Resistivity Sensor
 
 [internet-of-plants/iop-hal](https://github.com/internet-of-plants/iop-hal) integrated C++17 platformio library to manage soil resistivity sensors.
 
