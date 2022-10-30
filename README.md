@@ -12,4 +12,4 @@ Passes current through one wire and checks the analog measurement from the other
 
 ## License
 
-[GNU Affero General Public License version 3 or later (AGPL-3.0+)](https://github.com/internet-of-plants/soil_resistivity/blob/main/LICENSE)
+[GNU Affero General Public License version 3 or later (AGPL-3.0+)](https://github.com/internet-of-plants/soil-resistivity/blob/main/LICENSE)

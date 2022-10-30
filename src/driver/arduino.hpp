@@ -14,15 +14,15 @@ namespace sensor {
 #define SENSOR(self) static_cast<iop_hal::PinRaw*>((self).sensor)
 
 SoilResistivity::SoilResistivity(const iop_hal::PinRaw powerPin) noexcept: sensor(new (std::nothrow) iop_hal::PinRaw(powerPin)) {
-    iop_assert(this->sensor != nullptr, IOP_STR("Unable to allocate SoilResistivity"));
+    iop_assert(this->sensor, IOP_STR("Unable to allocate SoilResistivity"));
 }
 
 auto SoilResistivity::begin() noexcept -> void {
-    iop_assert(this->sensor != nullptr, IOP_STR("Sensor is nullptr"));
+    iop_assert(this->sensor, IOP_STR("Sensor is nullptr"));
     iop_hal::gpio.setMode(*SENSOR(*this), iop_hal::io::Mode::OUTPUT);
 }
 auto SoilResistivity::measure() noexcept -> uint16_t {
-    iop_assert(this->sensor != nullptr, IOP_STR("Sensor is nullptr"));
+    iop_assert(this->sensor, IOP_STR("Sensor is nullptr"));
     digitalWrite(*SENSOR(*this), static_cast<uint8_t>(iop_hal::io::Data::HIGH));
     delay(2000); // NOLINT *-avoid-magic-numbers
     uint16_t value1 = analogRead(A0);

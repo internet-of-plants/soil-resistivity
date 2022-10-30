@@ -1,10 +1,10 @@
 {
-  "name": "soil_resistivity",
+  "name": "soil-resistivity",
   "description": "",
-  "homepage": "https://github.com/internet-of-plants/soil_resistivity",
+  "homepage": "https://github.com/internet-of-plants/soil-resistivity",
   "repository": {
     "type": "git",
-    "url": "https://github.com/internet-of-plants/soil_resistivity.git"
+    "url": "https://github.com/internet-of-plants/soil-resistivity.git"
   },
   "version": "0.1.0",
   "authors": {
