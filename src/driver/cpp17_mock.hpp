@@ -23,7 +23,7 @@ auto randomVariation(uint16_t current) -> uint16_t {
     return std::min(current + static_cast<uint16_t>(dist(rng)) - 15, 1024);
 }
 
-SoilResistivity::SoilResistivity(const iop_hal::PinRaw powerPin) noexcept: sensor(new uint16_t(randomValue())) { (void) powerPin; }
+SoilResistivity::SoilResistivity() noexcept: sensor(new uint16_t(randomValue())) {}
 
 auto SoilResistivity::begin() noexcept -> void {}
 auto SoilResistivity::measure() noexcept -> uint16_t {

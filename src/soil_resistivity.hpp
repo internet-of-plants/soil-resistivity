@@ -8,7 +8,7 @@ namespace sensor {
 class SoilResistivity {
     void *sensor;
 public:
-    SoilResistivity(iop_hal::PinRaw powerPin) noexcept;
+    SoilResistivity() noexcept;
     auto begin() noexcept -> void;
     auto measure() noexcept -> uint16_t;
 

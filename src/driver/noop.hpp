@@ -4,7 +4,7 @@
 #include <soil_resistivity.hpp>
 
 namespace sensor {
-SoilResistivity::SoilResistivity(const iop_hal::PinRaw powerPin) noexcept { (void) powerPin; }
+SoilResistivity::SoilResistivity() noexcept {}
 
 auto SoilResistivity::begin() noexcept -> void {}
 auto SoilResistivity::measure() noexcept -> uint16_t { return 0; }
